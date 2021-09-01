@@ -69,7 +69,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Filip Petrovic, IV-1";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox1
             // 
@@ -79,7 +78,6 @@
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 4;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button3
             // 
@@ -89,6 +87,7 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "Blinkanje";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // button4
             // 
@@ -98,6 +97,7 @@
             this.button4.TabIndex = 6;
             this.button4.Text = "Proizvoljno";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // button5
             // 
@@ -133,6 +133,7 @@
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LEDControl";
             this.Load += new System.EventHandler(this.LEDControl_Load);
             this.ResumeLayout(false);
