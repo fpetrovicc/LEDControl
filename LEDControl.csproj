@@ -160,6 +160,10 @@
     </ItemGroup>
     <ItemGroup>
       <Content Include="led_diode.ico" />
+      <Content Include="README.md" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="pics" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
