@@ -35,11 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -79,76 +75,35 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 4;
+            this.textBox1.Text = "SPREMAN";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(118, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 40);
+            this.button3.Size = new System.Drawing.Size(102, 40);
             this.button3.TabIndex = 5;
             this.button3.Text = "Blinkanje";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
-            // button5
+            // button4
             // 
-            this.button5.Location = new System.Drawing.Point(118, 58);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 39);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Proizvoljno";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // label1
-            // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(199, 79);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 16);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "COM port";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {"COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8"});
-            this.comboBox1.Location = new System.Drawing.Point(199, 55);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(75, 21);
-            this.comboBox1.TabIndex = 10;
-            // 
-            // label3
-            // 
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label3.Location = new System.Drawing.Point(199, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 16);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Bit rate";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {"110", "300", "1200", "2400", "4800", "9600", "19200", "28800", "38400", "57600", "115200"});
-            this.comboBox2.Location = new System.Drawing.Point(199, 12);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(75, 21);
-            this.comboBox2.TabIndex = 12;
+            this.button4.Location = new System.Drawing.Point(118, 58);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(102, 37);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "3x brzo blinkanje";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 102);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button5);
+            this.ClientSize = new System.Drawing.Size(232, 102);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
@@ -158,20 +113,13 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LEDControl";
-            this.Load += new System.EventHandler(this.LEDControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox2;
-
-        private System.Windows.Forms.ComboBox comboBox1;
-
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button4;
 
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;

@@ -1,98 +1,71 @@
 ﻿// Filip Petrovic, IV-1, 2021.
 
-// TO-DO - Uraditi interfejs sa arduinom
-// TO-DO - Dodati opciju za biranje serial port-a
-
 using System;
-using System.IO.Ports;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace LEDControl
 {
     public partial class Form1 : Form
     {
-        SerialPort port = new SerialPort();
+        /* Initialization of private variables */
+        private const int Timeout = 2000; // Timeout used in showing messages
+        private static readonly string[] Status = { 
+            "SPREMAN", "UPALJEN", "BLINKANJE", "UGASEN"
+        }; // Status message array
 
-        struct Choice
-        {
-            public string PortName;
-            public string BaudRate;
-        }
-        
-        Choice choice;
-        
+        /* Event binding & form initialization */
         public Form1()
         {
             InitializeComponent();
-
-            FormClosed += Form1_FormClosed;
-            comboBox1.DropDownClosed += comboBox1_DropDownClosed;
-            comboBox2.DropDownClosed += comboBox2_DropDownClosed;
+            
+            AppDomain.CurrentDomain.UnhandledException += Program.UnhandledEx;
             button1.Click += button1_Click;
+            button2.Click += button2_Click;
+            button3.Click += button3_Click_1;
+            button4.Click += button4_Click;
         }
 
-        private void LEDControl_Load(object sender, EventArgs e)
-        {
-            // Inicijalizacija - initialization
-            port.PortName = "COM1";
-            port.BaudRate = 9600;
-        }
-
-        /* Eventovi za formu - form events */
-        void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (port != null && port.IsOpen)
-            {
-                port.Close();
-            }
-        }
-
-        private void comboBox1_DropDownClosed(object sender, EventArgs e)
-        {
-            choice.PortName = (sender as ComboBox).SelectedItem.ToString();
-            port.PortName = choice.PortName;
-            MessageBox.Show($"[COM: {choice.PortName}]");
-        }
+        /* Main on/off buttons */
         
-        private void comboBox2_DropDownClosed(object sender, EventArgs e)
-        {
-            choice.BaudRate = (sender as ComboBox).SelectedItem.ToString();
-            port.BaudRate = Convert.ToInt32(choice.BaudRate);
-            MessageBox.Show($"[BITRATE: {choice.BaudRate}]");
-        }
-        
-        /* Glavna dugmad za paljenje - main on/off buttons */
-        
-        // ON dugme/button
+        // ON button
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"COM: [{port.PortName}] BR: [{port.BaudRate}]");
+            Program.IsRunning = true;
+            textBox1.Text = Status[1];
+            Program.OnInf(Program.Driver);
         }
         
-        // OFF dugme/button
+        // OFF button
         private void button2_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            Program.IsRunning = false;
+            Program.Off(Program.Driver);
+            textBox1.Text = Status[3];
+            Thread.Sleep(Timeout);
+            textBox1.Text = Status[0];
         }
         
-        /* Dodatna dugmad sa strane - additional buttons on side */
+        /* Additional side buttons */
        
-        // Blinkanje dugme/button
+        // Blinking button
         private void button3_Click_1(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            Program.IsRunning = true;
+            textBox1.Text = Status[2];
+            Program.SendBlink(Program.Driver);
+            Thread.Sleep(Timeout);
+            textBox1.Text = Status[0];
         }
         
-        // Proizvoljno/TBA
-        private void button4_Click_1(object sender, EventArgs e)
+        // Blinking 3x button
+        private void button4_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
-        }
-        
-        // Proizvoljno/TBA
-        private void button5_Click(object sender, EventArgs e)
-        {
-            throw new System.NotImplementedException();
+            Program.IsRunning = true;
+            textBox1.Text = Status[2];
+            Program.SendBlink3(Program.Driver);
+            Thread.Sleep(Timeout);
+            textBox1.Text = Status[0];
         }
     }
 }
