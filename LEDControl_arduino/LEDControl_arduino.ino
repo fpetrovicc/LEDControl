@@ -1,16 +1,17 @@
-#include <ezOutput.h>
-
 String ulaz = "";
 String komanda = "";
 
 boolean ulazPrim = false;
 
-const unsigned long dTime = 1000; // delay u ms
+const unsigned long dTime = 100; // delay u ms
 const unsigned long baudRate = 9600; // baudrate za serial
-const int ledPin = 5; // pin za LED
+const int ledPin = 13; // pin za LED
+
+unsigned long prethodnoVreme = millis();
+bool blink = false;
+bool isOn = false;
 
 // ezOutput library
-ezOutput led(ledPin);
 
 void setup() 
 {
@@ -22,7 +23,25 @@ void setup()
 
 void loop()
 {
-  while (Serial.available())
+  
+  unsigned long trenutnoVreme = millis();
+  
+  if (blink) {
+    if (trenutnoVreme - prethodnoVreme >= dTime) {
+    	
+      if (isOn) {
+      	digitalWrite(ledPin, LOW);
+      } else {
+		digitalWrite(ledPin, HIGH);
+      }
+      isOn = !isOn;
+      
+      prethodnoVreme = trenutnoVreme;
+      
+    }
+  }
+  
+  if (Serial.available())
   {
     ulaz = Serial.readString(); // citanje ulaza sa serial porta
     traziKomandu(); // ucitavanje ulaza kao komanda
@@ -38,57 +57,45 @@ void loop()
     else if (komanda.equals("STOP"))
     {
       Serial.println("[STOP FUNKCIJA]");
-      led.low();
+      //led.low();
+      digitalWrite(ledPin, LOW);
     }
 
     // Paljenje sijalice
     else if (komanda.equals("LEDON"))
     {
-      boolean LedState = led.getState();
-
-      if (LedState == false)
-      {
         Serial.println("[LED ON FUNKCIJA]");
-        led.high();
-      }
+        //led.high();
+        digitalWrite(ledPin, HIGH);
       
     }
 
     // Gasenje sijalice
     else if (komanda.equals("LEDOF"))
     {
-      boolean LedState = led.getState();
-
-      if (LedState == true)
-      {
         Serial.println("[LED OFF FUNKCIJA]");
-        led.low();
-      }
+        //led.low();
+      	digitalWrite(ledPin, LOW);
     }
 
     // Blinkanje bez prestanka
     else if (komanda.equals("LEDBL"))
     {
-      boolean LedState = led.getState();
-
-      if (LedState == false)
-      {
         Serial.println("[LED BLINK FUNKCIJA]");
         ledBlink();
-      }
-      
     }
 
     // Blinkanje tri puta
-    else if (komanda.equals("LEDB3"))
+    else if (komanda.equals("LEDBT"))
     {
-      boolean LedState = led.getState();
-
-      if (LedState == false)
-      {
         Serial.println("[LED BLINK x3 FUNKCIJA]");
         ledBlinkTimed();
-      }
+    }
+    
+    else if (komanda.equals("STOPB")) {
+    	blink = false;
+      	isOn = false;
+      	digitalWrite(ledPin, LOW);
     }
   }
 
@@ -110,16 +117,17 @@ void traziKomandu()
 void ledBlinkTimed()
 {
   // TO-DO - dodati blinkanje sa odredjenim tajmingom
+  blink = true;
 }
 
 // Privremena test funkcija
 void ledBlink()
 {
-  led.high();
+  digitalWrite(ledPin, HIGH);
   delay(1000);
-  led.low();
+  digitalWrite(ledPin, LOW);
   delay(1000);
-  led.high();
+  digitalWrite(ledPin, HIGH);
   delay(1000);
-  led.low();
+  digitalWrite(ledPin, LOW);
 }
